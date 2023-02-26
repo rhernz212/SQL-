@@ -1,0 +1,30 @@
+# In this project I am querying a database holding Netflix data to answer questions about the data.
+#PostgreSQL Syntax is used 
+
+Q1. How many movie titles are there in the database? (movies only, not tv shows)*/
+SELECT COUNT(*)
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles 
+WHERE type = 'Movie'
+LIMIT 5;
+
+Q2. When was the most recent batch of tv shows and/or movies added to the database?*/
+SELECT MAX(DATE(titles.date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles;
+
+Q3. List all the movies and tv shows in alphabetical order.*/
+SELECT titles.title 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ORDER BY titles.title ASC;
+
+Q4. Who was the Director for the movie Bright Star?*/
+SELECT people.director 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles 
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_people" people 
+ON titles.show_id = people.show_id
+WHERE titles.title = 'Bright Star';
+
+Q5. What is the oldest movie in the database and what year was it made?*/
+SELECT titles.title, titles.release_year
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ORDER BY titles.release_year ASC
+LIMIT 1;
