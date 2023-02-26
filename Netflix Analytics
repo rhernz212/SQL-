@@ -1,5 +1,5 @@
 # In this project I am querying a database holding Netflix data to answer questions about the data.
-#PostgreSQL Syntax is used 
+# PostgreSQL Syntax is used 
 
 Q1. How many movie titles are there in the database? (movies only, not tv shows)*/
 SELECT COUNT(*)
