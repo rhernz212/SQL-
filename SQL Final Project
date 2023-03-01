@@ -1,0 +1,67 @@
+# In this project I am querying a database with multiple tables to answer questions about the customers, employees, invoices, etc. 
+
+#1 Show customers who are not in the US 
+
+SELECT FirstName, LastName, Country
+FROM chinook.customers
+WHERE Country <> 'USA'; 
+
+#2 Show only the customers from Brazil 
+
+SELECT FirstName, LastName, Country 
+FROM chinook.customers
+WHERE Country = 'Brazil'; 
+
+#3 Find the invoices of customers who are from Brazil. The table should show full name, Invoice ID, Date of the invoice, and billing country 
+
+SELECT FirstName, LastName, InvoiceID, InvoiceDate, BillingCountry
+FROM chinook.customers
+LEFT INNER JOIN chinook.invoices
+ON chinook.customers.CustomerId = chinook.invoices.CustomerId
+WHERE BillingCountry = 'Brazil'; 
+
+#4 Show the employees who are sales agents 
+
+SELECT FirstName, LastName, Title
+FROM chinook.employees
+WHERE title = 'Sales Support Agent';
+
+#5 Find a unique list of billing countries from the invoice table 
+
+SELECT distinct(BillingCountry) Unique_Billing_Country
+FROM chinook.invoices; 
+
+#6 Provide a query that shows the invoices associated with each sales agent. 
+
+SELECT emp.FirstName, emp.LastName, invoiceID
+FROM chinook.employees emp
+JOIN chinook.customers ON chinook.customers.SupportRepID = chinook.emp.EmployeeID
+JOIN chinook.invoices ON chinook.invoices.CustomerId = chinook.customers.customerID; 
+
+#7 Show the invoice total, customer name, country, and sales agent name for all invoices and customers. 
+
+SELECT 
+cust.FirstName Customer_First_Name, cust.LastName Customer_Last_Name, cust.Country, 
+emp.FirstName Employee_First_Name, emp.LastName Employee_Last_Name, 
+inv.total invoice_total
+FROM chinook.employees emp
+JOIN chinook.customers cust ON cust.SupportRepID = emp.EmployeeID
+JOIN chinook.invoices inv ON inv.CustomerID = cust.CustomerID;
+
+#8 How many invoices were there in 2009? 
+
+SELECT COUNT(InvoiceDate) Total_Invoices_In_2009
+FROM chinook.invoices
+WHERE InvoiceDate LIKE '2009%'; 
+
+#9 What are the total sales for 2009? 
+
+SELECT SUM(total) 
+FROM chinook.invoices
+WHERE InvoiceDate LIKE '2009%';
+
+#10 Write a query that includes the purchased track name with each invoice line ID. 
+
+SELECT tracks.Name, items.InvoiceLineId
+FROM chinook.tracks tracks 
+JOIN chinook.invoice_items items ON items.TrackID = tracks.TrackId;
