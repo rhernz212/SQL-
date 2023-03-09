@@ -1,0 +1,34 @@
+# For this project, I requested my personal data from Spotify for the previous year.
+# Then I created a table to insert the Spotify data into. 
+# I had to figure out how to convert JSON files to CSV files and add a unique id number to the data in Excel.
+# Once that was figured out, I imported all the data into the table.  
+# Finally, I performed analytics on the data using SQL. 
+
+# Creating the Table: 
+CREATE TABLE BIT_DB.Personalspotifydata (
+id INTEGER PRIMARY KEY, 
+endTime timestamp NOT NULL, 
+artistName varchar NOT NULL,
+trackName varchar NOT NULL,
+msPlayed integer NOT NULL
+) 
+
+# Since Bad Bunny was my number 1 artist last year, I wanted to figure out how many times he appeared in the data. 
+
+SELECT COUNT(artistName) AS times_played
+FROM BIT_DB.Personalspotifydata
+WHERE artistName LIKE '%Bad Bunny%';
+
+# times_played = 1293
+
+# My next question was which track did I play the most?
+
+SELECT  trackName AS most_played, COUNT(trackName) AS value_occurrence
+FROM BIT_DB.Personalspotifydata
+GROUP BY trackName
+ORDER BY value_occurrence DESC 
+LIMIT 1;
+
+# most_played = Titi Me Pregunto | value_occurrence = 133
+
+
