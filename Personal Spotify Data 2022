@@ -38,4 +38,13 @@ FROM BIT_DB.Personalspotifydata;
 
 # minutes_played = 34617 or roughly 24.04 days of listening time 
 
+# I then wanted to find out who my top 10 artists were for the previous year.
+
+SELECT artistName, COUNT(artistName) AS appearances
+FROM BIT_DB.Personalspotifydata
+GROUP BY artistName
+ORDER BY appearances DESC
+LIMIT 10;
+
+# returned my top 10 artists with the amount of times they appeared in the dataset 
 
