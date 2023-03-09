@@ -27,9 +27,9 @@ SELECT  trackName AS most_played, COUNT(trackName) AS value_occurrence
 FROM BIT_DB.Personalspotifydata
 GROUP BY trackName
 ORDER BY value_occurrence DESC 
-LIMIT 1;
+LIMIT 2;
 
-# most_played = Titi Me Pregunto | value_occurrence = 133
+# most_played = Titi Me Pregunto, Despues De La Playa | value_occurrence = 133 for each track 
 
 # Up next, I wanted to find out how much time I spent listening to music last year. 
 
