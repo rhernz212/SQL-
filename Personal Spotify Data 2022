@@ -31,4 +31,11 @@ LIMIT 1;
 
 # most_played = Titi Me Pregunto | value_occurrence = 133
 
+# Up next, I wanted to find out how much time I spent listening to music last year. 
+
+SELECT SUM((msPlayed/1000)/60) AS minutes_played  
+FROM BIT_DB.Personalspotifydata;
+
+# minutes_played = 34617 or roughly 24.04 days of listening time 
+
 
